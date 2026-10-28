@@ -1,0 +1,63 @@
+name: Update curl-runner
+
+# Hourly: if curl-runner has a newer GitHub release, regenerate the formula
+# from its SHA256SUMS.txt, prove it installs and passes `brew test`, then push.
+# On pushes that touch the formula or its tooling, only validate.
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to pin (default: latest release)"
+        required: false
+  push:
+    branches: [main]
+    paths:
+      - "Formula/curl-runner.rb"
+      - "scripts/update-curl-runner.sh"
+      - ".github/workflows/update-curl-runner.yml"
+
+permissions:
+  contents: write
+
+concurrency: update-curl-runner
+
+env:
+  HOMEBREW_NO_AUTO_UPDATE: "1"
+  HOMEBREW_NO_ENV_HINTS: "1"
+
+jobs:
+  update:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Regenerate formula
+        id: update
+        if: ${{ github.event_name != 'push' }}
+        run: scripts/update-curl-runner.sh "${VERSION:-}"
+        env:
+          VERSION: ${{ inputs.version }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit locally
+        if: ${{ steps.update.outputs.changed == 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "curl-runner ${{ steps.update.outputs.version }}"
+
+      - name: Install and test the formula
+        if: ${{ steps.update.outputs.changed == 'true' || github.event_name == 'push' }}
+        run: |
+          brew tap alexvcasillas/tap "$GITHUB_WORKSPACE"
+          brew style --formula alexvcasillas/tap/curl-runner
+          brew audit --formula --strict alexvcasillas/tap/curl-runner
+          brew install alexvcasillas/tap/curl-runner
+          brew test alexvcasillas/tap/curl-runner
+
+      - name: Push
+        if: ${{ steps.update.outputs.changed == 'true' }}
+        run: git push origin HEAD:main
