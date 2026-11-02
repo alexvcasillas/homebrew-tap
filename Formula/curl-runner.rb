@@ -3,28 +3,28 @@
 class CurlRunner < Formula
   desc "Run HTTP request suites defined in YAML, on libcurl"
   homepage "https://www.curl-runner.com"
-  version "2.2.0"
+  version "2.3.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.2.0/curl-runner-cli-2.2.0-darwin-arm64.tar.gz"
-      sha256 "d66727dc2c29b27ab494e3d41152d071d3ffb8e0e6685397012696abfec7123a"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.3.0/curl-runner-cli-2.3.0-darwin-arm64.tar.gz"
+      sha256 "e82f7847ccdd7b83c1f714fb43e0db179d91ebd3c79b01d2bf766ca608b6ee98"
     end
     on_intel do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.2.0/curl-runner-cli-2.2.0-darwin-x64.tar.gz"
-      sha256 "88dc0037f1deb43375968a6234b5ab3b6a8dd5b445e778b631387f939a57b6c4"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.3.0/curl-runner-cli-2.3.0-darwin-x64.tar.gz"
+      sha256 "af5b88d0bd3895cf1255d93a1d8a7e99ddfa217e0648713af41638f5358ec80f"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.2.0/curl-runner-cli-2.2.0-linux-arm64.tar.gz"
-      sha256 "c465b48fc3ac194d98a925ba33be72f0b2936bfbadc93818fea8282b50daf483"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.3.0/curl-runner-cli-2.3.0-linux-arm64.tar.gz"
+      sha256 "da2487172f4f035306e1aa17c34116bed4ca72893b4915c9d2407c4bb10139e4"
     end
     on_intel do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.2.0/curl-runner-cli-2.2.0-linux-x64.tar.gz"
-      sha256 "81192bc438204669d424464e39a47386233cc870b310011a63ccd1c8cec0bbb2"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.3.0/curl-runner-cli-2.3.0-linux-x64.tar.gz"
+      sha256 "6b1784cdd2afa27ae30d2544d30ef1a6635f93c859d8f259c27506ac6c639f3c"
     end
   end
 
