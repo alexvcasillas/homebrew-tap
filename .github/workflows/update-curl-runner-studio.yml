@@ -1,0 +1,73 @@
+name: Update curl-runner studio
+
+# Hourly: if the latest curl-runner release has a studio dmg the cask doesn't
+# point at yet, regenerate the cask, prove it passes style/audit and installs,
+# then push. A release without a dmg is skipped, not failed.
+# On pushes that touch the cask or its tooling, only validate.
+on:
+  schedule:
+    - cron: "47 * * * *"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to pin (default: latest release)"
+        required: false
+  push:
+    branches: [main]
+    paths:
+      - "Casks/curl-runner-studio.rb"
+      - "scripts/update-curl-runner-studio.sh"
+      - ".github/workflows/update-curl-runner-studio.yml"
+
+permissions:
+  contents: write
+
+concurrency: update-curl-runner-studio
+
+env:
+  HOMEBREW_NO_AUTO_UPDATE: "1"
+  HOMEBREW_NO_ENV_HINTS: "1"
+
+jobs:
+  update:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Regenerate cask
+        id: update
+        if: ${{ github.event_name != 'push' }}
+        run: scripts/update-curl-runner-studio.sh "${VERSION:-}"
+        env:
+          VERSION: ${{ inputs.version }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check a cask exists to validate
+        id: cask
+        run: |
+          if [ -f Casks/curl-runner-studio.rb ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit locally
+        if: ${{ steps.update.outputs.changed == 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Casks/curl-runner-studio.rb
+          git commit -m "curl-runner studio ${{ steps.update.outputs.version }}"
+
+      - name: Install and audit the cask
+        if: ${{ steps.cask.outputs.exists == 'true' && (steps.update.outputs.changed == 'true' || github.event_name == 'push') }}
+        run: |
+          brew tap alexvcasillas/tap "$GITHUB_WORKSPACE"
+          brew style --cask alexvcasillas/tap/curl-runner-studio
+          brew audit --cask --strict alexvcasillas/tap/curl-runner-studio
+          brew install --cask alexvcasillas/tap/curl-runner-studio
+
+      - name: Push
+        if: ${{ steps.update.outputs.changed == 'true' }}
+        run: git push origin HEAD:main
