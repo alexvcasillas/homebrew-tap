@@ -53,6 +53,7 @@ jobs:
         if: ${{ steps.update.outputs.changed == 'true' || github.event_name == 'push' }}
         run: |
           brew tap alexvcasillas/tap "$GITHUB_WORKSPACE"
+          brew trust --tap alexvcasillas/tap
           brew style --formula alexvcasillas/tap/curl-runner
           brew audit --formula --strict alexvcasillas/tap/curl-runner
           brew install alexvcasillas/tap/curl-runner

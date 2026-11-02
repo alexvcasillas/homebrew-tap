@@ -64,6 +64,7 @@ jobs:
         if: ${{ steps.cask.outputs.exists == 'true' && (steps.update.outputs.changed == 'true' || github.event_name == 'push') }}
         run: |
           brew tap alexvcasillas/tap "$GITHUB_WORKSPACE"
+          brew trust --tap alexvcasillas/tap
           brew style --cask alexvcasillas/tap/curl-runner-studio
           brew audit --cask --strict alexvcasillas/tap/curl-runner-studio
           brew install --cask alexvcasillas/tap/curl-runner-studio
