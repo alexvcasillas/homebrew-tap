@@ -3,28 +3,28 @@
 class CurlRunner < Formula
   desc "Run HTTP request suites defined in YAML, on libcurl"
   homepage "https://www.curl-runner.com"
-  version "2.3.0"
+  version "2.4.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.3.0/curl-runner-cli-2.3.0-darwin-arm64.tar.gz"
-      sha256 "e82f7847ccdd7b83c1f714fb43e0db179d91ebd3c79b01d2bf766ca608b6ee98"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.4.0/curl-runner-cli-2.4.0-darwin-arm64.tar.gz"
+      sha256 "f089df4ac0675934ba5cddc58df2a535b861d062e110598888383b572fb7022e"
     end
     on_intel do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.3.0/curl-runner-cli-2.3.0-darwin-x64.tar.gz"
-      sha256 "af5b88d0bd3895cf1255d93a1d8a7e99ddfa217e0648713af41638f5358ec80f"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.4.0/curl-runner-cli-2.4.0-darwin-x64.tar.gz"
+      sha256 "924d777cca4cf33109db6ece9f45c0695169e1bd754d0e153252e57702a65054"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.3.0/curl-runner-cli-2.3.0-linux-arm64.tar.gz"
-      sha256 "da2487172f4f035306e1aa17c34116bed4ca72893b4915c9d2407c4bb10139e4"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.4.0/curl-runner-cli-2.4.0-linux-arm64.tar.gz"
+      sha256 "f751f48b7890e4d6c84add0f2f1b125165bd5b00951e727450d88761b1bf4b71"
     end
     on_intel do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.3.0/curl-runner-cli-2.3.0-linux-x64.tar.gz"
-      sha256 "6b1784cdd2afa27ae30d2544d30ef1a6635f93c859d8f259c27506ac6c639f3c"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.4.0/curl-runner-cli-2.4.0-linux-x64.tar.gz"
+      sha256 "42106306f3e7b7d97431172af1655fa78f55b12f570b8249222b98989e367807"
     end
   end
 
