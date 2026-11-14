@@ -3,28 +3,28 @@
 class CurlRunner < Formula
   desc "Run HTTP request suites defined in YAML, on libcurl"
   homepage "https://www.curl-runner.com"
-  version "2.13.1"
+  version "2.14.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.13.1/curl-runner-cli-2.13.1-darwin-arm64.tar.gz"
-      sha256 "a24ff994c51fb6b0fa4f1b68249443a25c84cde1b4742f5567c91f95ff802b02"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.14.0/curl-runner-cli-2.14.0-darwin-arm64.tar.gz"
+      sha256 "45db2cfe272f716629ee647332b77745dd52f1fcaefea3c537c677e72833d056"
     end
     on_intel do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.13.1/curl-runner-cli-2.13.1-darwin-x64.tar.gz"
-      sha256 "6f1755dbd489382d48c803303dc69b74f469f90aa8446397c71cb456d4c074dc"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.14.0/curl-runner-cli-2.14.0-darwin-x64.tar.gz"
+      sha256 "56cae4130ca8df522b0f6190d8fc9b086af358aad17185c4e0e6646022db0780"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.13.1/curl-runner-cli-2.13.1-linux-arm64.tar.gz"
-      sha256 "dba4252d178ae8fba4e568a2c6484e0caf3e7c06bcbf180c6f1d0186dede21ff"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.14.0/curl-runner-cli-2.14.0-linux-arm64.tar.gz"
+      sha256 "dcd557dfc2ae57a89b7feb38e702f516705e8d5de87506a7c0eb46241637cffa"
     end
     on_intel do
-      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.13.1/curl-runner-cli-2.13.1-linux-x64.tar.gz"
-      sha256 "b7db5591719f2d82e0bdf1d350f2ba79fe30d7835137c250c38ada5e7afbfe17"
+      url "https://github.com/alexvcasillas/curl-runner/releases/download/@curl-runner/cli@2.14.0/curl-runner-cli-2.14.0-linux-x64.tar.gz"
+      sha256 "1b063b52cc2aeacf095f8aa5fe4b135511a630ebfc0bb43dbe3faa98fe195e6a"
     end
   end
 
